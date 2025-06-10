@@ -25,12 +25,12 @@ const Portfolio = () => {
   const skills = {
     programming: ['Java', 'C++', 'Python', 'Kotlin', 'HTML/CSS', 'JavaScript', 'PHP'],
     tools: ['Android Studio', 'Git', 'MySQL', 'Figma', 'Qt Designer', 'Microsoft Office'],
-    concepts: ['UI/UX Design', 'Database Management', 'Mobile Development', 'Web Programming']
+    concepts: ['UI/UX Design', 'Web Development', 'Database Management', 'Mobile Development', 'Web Programming']
   };
 
   const experiences = [
     {
-      title: 'Desktop UI Designer Intern',
+      title: 'Desktop GUI Developer Intern',
       company: 'North Carolina State University',
       period: 'April 2025 – May 2025',
       description: 'Designed responsive desktop GUIs using Qt and Python, collaborating with engineers for seamless hardware-software integration.',
@@ -59,7 +59,17 @@ const Portfolio = () => {
       tech: ['Kotlin', 'Java', 'Laravel', 'Android Studio'],
       period: 'Aug 2024 - Dec 2024',
       type: 'Mobile App',
-      icon: <Smartphone className="w-6 h-6" />
+      icon: <Smartphone className="w-6 h-6" />,
+      link: 'https://github.com/Jennifernwaa/neoemployeeapp' 
+    },
+    {
+      title: 'myBookSpace',
+      description: 'Personalized, AI-integrated web app for book lovers. Users can log and track their reads, get intelligent book recommendations, and connect with fellow readers through community features like friends and activity feeds.',
+      tech: ['HTML&CSS', 'Javascript', 'Firebase Firestore', 'Tailwind CSS', 'Groq AI', 'Open Library API'],
+      period: 'May 2025 - Today',
+      type: 'Website',
+      icon: <Smartphone className="w-6 h-6" />,
+      link: 'https://get-nerdy-book-web.vercel.app/' 
     },
     {
       title: 'ScholaCash E-Wallet',
@@ -67,7 +77,17 @@ const Portfolio = () => {
       tech: ['Figma', 'UI/UX Design'],
       period: 'Jul 2024',
       type: 'UI/UX Design',
-      icon: <Award className="w-6 h-6" />
+      icon: <Award className="w-6 h-6" />,
+      link: 'https://www.figma.com/design/iezorcjInDsZUp3k2qNtkN/CyberComp?node-id=77-2&t=GxMp3TAaFdavSb2J-1'
+    },
+    {
+      title: 'Just for Fun Games',
+      description: 'Fun Simple Games that shows my creative side in programming. Games include ',
+      tech: ['FastHTML', 'Javascript', 'Python'],
+      period: 'June 2025 - Present',
+      type: 'Website',
+      icon: <Award className="w-6 h-6" />,
+      link: 'https://html-python-nu.vercel.app'
     },
     {
       title: 'TrendyClosets Database',
@@ -75,7 +95,8 @@ const Portfolio = () => {
       tech: ['MySQL', 'Excel', 'Database Design'],
       period: 'Dec 2024',
       type: 'Database',
-      icon: <Database className="w-6 h-6" />
+      icon: <Database className="w-6 h-6" />,
+      link: 'https://jennysweb.vercel.app'
     }
   ];
 
@@ -95,7 +116,7 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
       {/* Animated Background */}
-      <div className="fixed inset-0 opacity-30">
+      <div className="fixed inset-0 opacity-30 pointer-events-none">
         <div 
           className="absolute w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
           style={{
@@ -127,7 +148,13 @@ const Portfolio = () => {
               {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
                 <button
                   key={item}
-                  onClick={() => setActiveSection(item.toLowerCase())}
+                  onClick={() => {
+                    setActiveSection(item.toLowerCase());
+                    const section = document.getElementById(item.toLowerCase());
+                    if (section) {
+                      section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                   className="hover:text-purple-300 transition-colors relative group"
                 >
                   {item}
@@ -155,8 +182,11 @@ const Portfolio = () => {
                   key={item}
                   onClick={() => {
                     setActiveSection(item.toLowerCase());
-                    setIsMenuOpen(false);
-                  }}
+                    const section = document.getElementById(item.toLowerCase());
+                      if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                   className="block w-full text-left py-2 hover:text-purple-300 transition-colors"
                 >
                   {item}
@@ -220,7 +250,7 @@ const Portfolio = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-20 relative">
+      <section id="about" className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             About Me
@@ -289,7 +319,7 @@ const Portfolio = () => {
       </section>
 
       {/* Experience Section */}
-      <section className="py-20 bg-black/20">
+      <section id="experience" className="py-20 bg-black/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             Experience
@@ -318,7 +348,7 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="py-20">
+      <section id="projects" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             Featured Projects
@@ -349,19 +379,16 @@ const Portfolio = () => {
                 
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-400">{project.period}</span>
-                  <ExternalLink className="w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                  </a>
                 </div>
               </div>
             ))}
-          </div>
-          
-          {/* Add New Project Placeholder */}
-          <div className="mt-8 bg-white/5 backdrop-blur-lg rounded-2xl p-6 border-2 border-dashed border-white/20 hover:border-purple-500/30 transition-all text-center">
-            <div className="text-gray-400 mb-2">
-              <Code className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <p className="text-lg">Ready to add your next amazing project?</p>
-              <p className="text-sm">This modular design makes it easy to showcase new work</p>
-            </div>
           </div>
         </div>
       </section>
@@ -391,7 +418,7 @@ const Portfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20">
+      <section id="contact" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             Let's Connect
