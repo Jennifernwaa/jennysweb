@@ -72,7 +72,7 @@ const Portfolio = () => {
       link: 'https://get-nerdy-book-web.vercel.app/' 
     },
     {title: 'MoodBite',
-      description: 'Food recommendations based on your mood and craving. Users select their current mood, specify any particular cravings they might have, receive personalized food recommendations based on those inputs, and wiew recommended food items with appealing visuals and descriptions',
+      description: 'Food recommendations based on your mood and craving. Food recommended food items with appealing visuals and descriptions',
       tect: ['React', 'Vite', 'TailwindCSS', 'ESLint', 'Javascript'],
       period: 'June 2025 - Today',
       type: 'Website',
