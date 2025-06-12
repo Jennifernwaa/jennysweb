@@ -71,6 +71,14 @@ const Portfolio = () => {
       icon: <Smartphone className="w-6 h-6" />,
       link: 'https://get-nerdy-book-web.vercel.app/' 
     },
+    {title: 'MoodBite',
+      description: 'Food recommendations based on your mood and craving. Users select their current mood, specify any particular cravings they might have, receive personalized food recommendations based on those inputs, and wiew recommended food items with appealing visuals and descriptions',
+      tect: ['React', 'Vite', 'TailwindCSS', 'ESLint', 'Javascript'],
+      period: 'June 2025 - Today',
+      type: 'Website',
+      icon: <Smartphone className="w-6 h-6" />,
+      link: 'https://youarewhatyoueat-v1.mgx.world'
+    },
     {
       title: 'ScholaCash E-Wallet',
       description: 'Award-winning FinTech prototype for teenage financial literacy with QRIS payments and learning modules.',
