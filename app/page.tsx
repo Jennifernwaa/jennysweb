@@ -73,7 +73,7 @@ const Portfolio = () => {
     },
     {title: 'MoodBite',
       description: 'Food recommendations based on your mood and craving. Food recommended food items with appealing visuals and descriptions',
-      tect: ['React', 'Vite', 'TailwindCSS', 'ESLint', 'Javascript'],
+      tech: ['React', 'Vite', 'TailwindCSS', 'ESLint', 'Javascript'],
       period: 'June 2025 - Today',
       type: 'Website',
       icon: <Smartphone className="w-6 h-6" />,
