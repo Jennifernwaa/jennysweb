@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Jenn's Portfolio",
   description: "Made by Jennifer Nwachinaemere",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
