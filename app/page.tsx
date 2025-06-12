@@ -378,7 +378,7 @@ const Portfolio = () => {
                 <p className="text-gray-300 mb-4">{project.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
+                  {project.tech?.map((tech) => (
                     <span key={tech} className="bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded text-xs border border-cyan-500/30">
                       {tech}
                     </span>
