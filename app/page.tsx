@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, MapPin, Phone, ExternalLink, Code, Database, Smartphone, Award, Calendar, ChevronRight, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Laptop, Mail, MapPin, Phone, ExternalLink, Code, Database, Smartphone, Award, Calendar, ChevronRight, Menu, X, Download, Instagram } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [typedText, setTypedText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+
+  const terminalText = "Take a look around Jenn's Portfolio!";
 
   useEffect(() => {
     interface MousePosition {
@@ -14,17 +18,57 @@ const Portfolio = () => {
       y: number;
     }
 
-    const handleMouseMove = (e: MouseEvent): void => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const handleMouseMove = (e: MousePosition): void => {
+      setMousePosition({ x: e.x, y: e.y });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+  // Typing effect (Terminal)
+  useEffect(() => {
+    let i = 0;
+    let typingTimer: NodeJS.Timeout;
+    let restartTimer: NodeJS.Timeout;
+
+    const startTyping = () => {
+      setTypedText('');
+      i = 0;
+      typingTimer = setInterval(() => {
+        if (i < terminalText.length) {
+          setTypedText(terminalText.slice(0, i + 1));
+          i++;
+        } else {
+          clearInterval(typingTimer);
+          restartTimer = setTimeout(() => {
+            startTyping();
+          }, 3000);
+        }
+      }, 100);
+    };
+
+    startTyping();
+
+    return () => {
+      clearInterval(typingTimer);
+      clearTimeout(restartTimer);
+    };
   }, []);
 
+  // Cursor blink effect
+  useEffect(() => {
+    const cursorTimer = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+
+    return () => clearInterval(cursorTimer);
+  }, []);
+
+
   const skills = {
-    programming: ['Java', 'C++', 'Python', 'Kotlin', 'HTML/CSS', 'JavaScript', 'PHP'],
-    tools: ['Android Studio', 'Git', 'MySQL', 'Figma', 'Qt Designer', 'Microsoft Office'],
+    programming: ['Java','JavaScript', 'Python', 'C++', 'Kotlin', 'HTML/CSS', 'PHP', 'React', 'Next.js', 'Node.js', 'Express.js'],
+    tools: ['Android Studio', 'Git', 'MySQL', 'Figma', 'Qt Designer', 'Microsoft Office', 'Firebase'],
     concepts: ['UI/UX Design', 'Web Development', 'Database Management', 'Mobile Development', 'Web Programming']
   };
 
@@ -32,15 +76,15 @@ const Portfolio = () => {
     {
       title: 'Desktop GUI Developer Intern',
       company: 'North Carolina State University',
-      period: 'April 2025 – May 2025',
-      description: 'Designed responsive desktop GUIs using Qt and Python, collaborating with engineers for seamless hardware-software integration.',
+      period: 'April 2025 – June 2025',
+      description: 'Designed and implemented real-time data acquisition GUIs for the Impedance Analyzer hardware at North Carolina State University CCEE Department using Qt Designer and Python.\n\nThe interface featured live data plotting, hardware connection detection, and user-friendly controls, all tailored to meet the branding and functionality requirements of Nort Carolina State.\n\nCollaborated with engineers for seamless hardware-software integration.',
       icon: <Code className="w-5 h-5" />
     },
     {
       title: 'Web Developer & Secretary',
       company: 'Google Developer Student Club',
       period: 'Sep 2023 – May 2024',
-      description: 'Developed responsive website for Faculty of Engineering, managed project proposals and coordinated operations.',
+      description: 'Designed and developed a responsive website for the Faculty of Engineering and Technology, enhancing user engagement and accessibility.\n\n\nSuccessfully managed and implemented project proposals within budgetary constraints, ensuring alignment with timelines.\n\nCoordinated class schedules and logistics, streamlining operations for both students and faculty.',
       icon: <Database className="w-5 h-5" />
     },
     {
@@ -68,7 +112,7 @@ const Portfolio = () => {
       tech: ['HTML&CSS', 'Javascript', 'Firebase Firestore', 'Tailwind CSS', 'Groq AI', 'Open Library API'],
       period: 'May 2025 - Today',
       type: 'Website',
-      icon: <Smartphone className="w-6 h-6" />,
+      icon: <Laptop className="w-6 h-6" />,
       link: 'https://get-nerdy-book-web.vercel.app/' 
     },
     {title: 'MoodBite',
@@ -76,7 +120,7 @@ const Portfolio = () => {
       tech: ['React', 'Vite', 'TailwindCSS', 'ESLint', 'Javascript'],
       period: 'June 2025 - Today',
       type: 'Website',
-      icon: <Smartphone className="w-6 h-6" />,
+      icon: <Laptop className="w-6 h-6" />,
       link: 'https://youarewhatyoueat-v1.mgx.world'
     },
     {
@@ -90,11 +134,11 @@ const Portfolio = () => {
     },
     {
       title: 'Just for Fun Games',
-      description: 'Fun Simple Games that shows my creative side in programming. Games include ',
+      description: 'Fun Simple Games that shows my creative side in programming. Games include "colour by numbers" and "falling sand gravity".',
       tech: ['FastHTML', 'Javascript', 'Python'],
-      period: 'June 2025 - Present',
+      period: 'June 2025 - Today',
       type: 'Website',
-      icon: <Award className="w-6 h-6" />,
+      icon: <Laptop className="w-6 h-6" />,
       link: 'https://html-python-nu.vercel.app'
     },
     {
@@ -148,7 +192,7 @@ const Portfolio = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Jennifer NW
+              Jenni's Portfolio
             </div>
             
             {/* Desktop Menu */}
@@ -208,26 +252,49 @@ const Portfolio = () => {
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-stone-200 shadow-lg font-mono text-left max-w-2xl mx-auto">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-3 h-3 rounded-full bg-red-400"></div>
+              <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+              <div className="w-3 h-3 rounded-full bg-green-400"></div>
+              <span className="text-stone-600 text-sm ml-2">terminal</span>
+            </div>
+            <div className="text-stone-800">
+              <span className="text-rose-600">$</span> whoami
+              <br />
+              <span className="text-stone-900">{typedText}</span>
+              <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>|</span>
+            </div>
+          </div>
           <div className="animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
               Jennifer Nwachinaemere
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
-              Innovative Computer Science Student & Aspiring Developer
+              Innovative Computer Science Student & Aspiring Software Developer
             </p>
             <p className="text-lg mb-12 text-gray-400 max-w-2xl mx-auto">
               Passionate about front-end development, UI/UX design, and creating user-friendly digital solutions. 
-              Experienced in mobile app development, database management, and automated testing.
+              Experienced in mobile app development, database management, and web development.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               <a
+                href="/Jennifers_Portfolio.pdf"
+                download
+                className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-full transition-colors"
+              >
+                  <Download className="w-5 h-5" />
+                  Download Portfolio (PDF)
+              </a>
+              {/* <a
                 href="mailto:jennifernwachinaemere@gmail.com"
                 className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-full transition-colors"
               >
-                <Mail className="w-5 h-5" />
+
+                <Download className="w-5 h-5" />
                 Get In Touch
-              </a>
+              </a> */}
               <a
                 href="https://github.com/Jennifernwaa"
                 target="_blank"
@@ -434,17 +501,19 @@ const Portfolio = () => {
           
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xl text-gray-300 mb-12">
-              I'm always excited to discuss new opportunities, collaborate on projects, or just chat about technology and innovation.
+              I'm always excited to discuss new job opportunities, collaborate on projects, and even just chat about technology and innovation.
             </p>
             
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="grid md:grid-cols-4 gap-4 mb-12">
               <a
                 href="mailto:jennifernwachinaemere@gmail.com"
                 className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-purple-500/30 transition-all group"
               >
                 <Mail className="w-8 h-8 text-purple-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-semibold mb-2">Email</h3>
-                <p className="text-gray-400 text-sm">jennifernwachinaemere@gmail.com</p>
+                <p className="text-gray-400 text-sm break-all text-center">
+                  jennifernwachinaemere@gmail.com
+                </p>
               </a>
               
               <a
@@ -467,6 +536,17 @@ const Portfolio = () => {
                 <Github className="w-8 h-8 text-pink-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-semibold mb-2">GitHub</h3>
                 <p className="text-gray-400 text-sm">Check out my code</p>
+              </a>
+
+              <a
+              href="https://www.instagram.com/jenniferrnw/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 transition-all group"
+              >
+                <Instagram className="w-8 h-8 text-pink-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-lg font-semibold mb-2">Instagram</h3>
+                  <p className="text-gray-400 text-sm">My Instagram!!</p>
               </a>
             </div>
           </div>
